@@ -1,0 +1,12 @@
+{
+  "name": "my-website",
+  "version": "1.0.0",
+  "description": "building my personal website from scratch",
+  "main": "index.js",
+  "repository": "git@github.com:sraj50/my-website.git",
+  "author": "Sid Raj <siddharth.rajesh13@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  }
+}
