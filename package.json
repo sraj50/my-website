@@ -7,6 +7,9 @@
   "author": "Sid Raj <siddharth.rajesh13@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "aws-lambda": "^1.0.6",
+    "graphql": "^15.3.0",
+    "graphql-playground-html": "^1.6.22",
     "graphql-yoga": "^1.18.3"
   }
 }
