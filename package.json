@@ -7,6 +7,8 @@
   "author": "Sid Raj <siddharth.rajesh13@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@prisma/cli": "2.2.2",
+    "@prisma/client": "2.2.2",
     "apollo-server-core": "^2.14.2",
     "apollo-server-express": "^2.14.2",
     "apollo-server-lambda": "^2.14.2",
