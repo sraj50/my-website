@@ -1,13 +1,12 @@
 datasource db {
 	provider = "sqlite"
-	url = "file:./dev.db"
+	url = "***"
 }
 
 generator client {
 	provider = "prisma-client-js"
 }
 
-// Link <-> User relation id of user is foreign key in relation annotated by postedById
 model Link {
 	id 			Int 		@id @default(autoincrement())
 	createdAt	DateTime	@default(now())
