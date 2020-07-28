@@ -13,9 +13,11 @@
     "apollo-server-express": "^2.14.2",
     "apollo-server-lambda": "^2.14.2",
     "aws-lambda": "^1.0.6",
+    "bcryptjs": "^2.4.3",
     "graphql": "^15.3.0",
     "graphql-playground-html": "^1.6.22",
-    "graphql-yoga": "^1.18.3"
+    "graphql-yoga": "^1.18.3",
+    "jsonwebtoken": "^8.5.1"
   },
   "resolutions": {
     "graphql": "15.3.0"
