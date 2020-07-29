@@ -21,5 +21,8 @@
   },
   "resolutions": {
     "graphql": "15.3.0"
+  },
+  "scripts" : {
+    "start": "node src/index.js"
   }
 }

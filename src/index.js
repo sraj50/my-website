@@ -1,4 +1,4 @@
-const { GraphQLServer } = require("graphql-yoga");
+const { GraphQLServer, PubSub } = require("graphql-yoga");
 const { PrismaClient } = require("@prisma/client");
 
 // resolvers
@@ -6,15 +6,18 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
+const Subscription = require('./resolvers/Subscription');
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
+const pubsub = new PubSub()
 
 // implement GraphQL schema with resolvers
 const resolvers = {
     Query,
     Mutation,
     User,
-    Link
+    Link,
+    Subscription
 }
 
 // GraphQL server
@@ -24,7 +27,8 @@ const server = new GraphQLServer({
     context: request => {   // context is a function that returns the HTTP request (array of objects) from GraphQL Query/Mutation
         return {            // and the PrismaClient object also
             ...request,
-            prisma
+            prisma,
+            pubsub          // add pubsub to context
         }
     }
 });

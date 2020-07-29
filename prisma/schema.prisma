@@ -9,18 +9,18 @@ generator client {
 
 // Link <-> User relation id of user is foreign key in relation annotated by postedById
 model Link {
-	id 			Int 		@id @default(autoincrement())
-	createdAt	DateTime	@default(now())
+	id 					Int 			@id @default(autoincrement())
+	createdAt		DateTime	@default(now())
 	description	String
-	url			String
-	postedBy	User?		@relation(fields: [postedById], references: [id])
+	url					String
+	postedBy		User?			@relation(fields: [postedById], references: [id])
 	postedById 	Int?
 }
 
 model User {
-	id			Int			@id @default(autoincrement())
-	name		String
-	email		String		@unique
+	id				Int				@id @default(autoincrement())
+	name			String
+	email			String		@unique
 	password	String
-	links		Link[]
+	links			Link[]
 }

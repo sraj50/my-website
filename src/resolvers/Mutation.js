@@ -49,13 +49,19 @@ function post(parent, args, context, info) {
     // retrieve userId that is authenticating
     const userId = getUserId(context)
 
-    return context.prisma.link.create({
+    // create new entry in DB
+    const newLink = context.prisma.link.create({
         data: {
             url: args.url,
             description: args.description,
             postedBy: { connect: { id: userId } }
         }
     })
+
+    // publish subscription
+    context.pubsub.publish("NEW_LINK", newLink)
+
+    return newLink
 }
 
 module.exports = {
