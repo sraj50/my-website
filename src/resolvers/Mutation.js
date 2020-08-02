@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
+// signup resolver
 async function signUp(parent, args, context, info) {
     // encrypt password input from user
     const password = await bcrypt.hash(args.password, 10)
@@ -19,6 +20,7 @@ async function signUp(parent, args, context, info) {
     }
 }
 
+// login resolver
 async function login(parent, args, context, info) {
     // find user from database using Prisma Client based on email
     // specified in where condition
@@ -45,6 +47,7 @@ async function login(parent, args, context, info) {
     }
 }
 
+// post resolver
 function post(parent, args, context, info) {
     // retrieve userId that is authenticating
     const userId = getUserId(context)
@@ -64,8 +67,42 @@ function post(parent, args, context, info) {
     return newLink
 }
 
+// vote resolver
+async function vote(parent, args, context, info) {
+  // get JWT of user trying to vote
+  const userId = getUserId(context)
+
+  // find vote based on linkId and userId
+  const vote = await context.prisma.vote.findOne({
+    where: {
+      linkId_userId: {
+        linkId: Number(args.linkId),
+        userId = userId
+      }
+    }
+  })
+
+  // if vote already exists, throw error
+  if(Boolean(vote)) {
+    throw new Error(`Already voted for link: ${args.linkId}`)
+  }
+
+  // if vote does not exist, create new vote
+  const newVote = context.prisma.vote.create({
+    data: {
+      user: { connect: {id: userId} },
+      link: { connect: {id: Number(args.linkId)} }
+    }
+  })
+
+  // publish newly created vote
+  context.pubsub.publish("NEW_VOTE", newVote)
+  return newVote
+}
+
 module.exports = {
     signUp,
     login,
-    post
+    post,
+    vote
 }
