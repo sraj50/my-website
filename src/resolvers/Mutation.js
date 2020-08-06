@@ -77,7 +77,7 @@ async function vote(parent, args, context, info) {
     where: {
       linkId_userId: {
         linkId: Number(args.linkId),
-        userId = userId
+        userId:  userId
       }
     }
   })
